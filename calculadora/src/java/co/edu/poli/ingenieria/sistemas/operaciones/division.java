@@ -12,4 +12,6 @@ package co.edu.poli.ingenieria.sistemas.operaciones;
  */
 public interface division {
     
+   /***/
+    
 }
