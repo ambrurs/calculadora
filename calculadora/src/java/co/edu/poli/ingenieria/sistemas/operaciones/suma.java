@@ -11,5 +11,5 @@ package co.edu.poli.ingenieria.sistemas.operaciones;
  * @author andres
  */
 public interface suma {
-    
+    /***/
 }
