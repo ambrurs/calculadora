@@ -10,110 +10,114 @@
     <h:body>
         <div id="contenido">
             <div id="content">
-                <!-- Boton de encendido --> 
-                <div id="encendido">
-                    <p:outputPanel id="panelVista" >
-                        <p:commandButton id="btnEncendido" value="Off"
-                                         styleClass="btnEncendido" > 
+                <h:form> 
+                    <p:growl id="growl" life="2000" />
+                    <!-- Boton de encendido --> 
+                    <div id="encendido">
+                        <p:outputPanel id="estado" >
+                            <p:commandButton id="btnEncendido" value="Off"
+                                             styleClass="btnEncendido" > 
 
-                        </p:commandButton>
-                    </p:outputPanel>    
-                </div>
+                            </p:commandButton>
+                        </p:outputPanel>    
+                    </div>
 
-                <!-- Resultado de las operaciones y demas -->
-                <div id="pantalla">
-                    <p:outputPanel id="panelVista" >
-                        <p:outputLabel id="display" value="#{calculadoraManaged.display}" />
-                    </p:outputPanel>
-                </div>
+                    <!-- Resultado de las operaciones y demas -->
+                    <div id="pantalla">
+                        <p:outputPanel id="panelVista" >
+                            <p:outputLabel id="display" value="#{calculadoraManaged.display}" />
+                        </p:outputPanel>
+                    </div>
 
-                <!-- Botones  -->
-                <div id="botones">
-                    <!-- Botones memoria -->
-                    <table id="btnMemoria" >
-                        <tr>
-                            <td>
-                                <p:commandButton value="M+" styleClass="btnMemoria btnGuardarMemoria"  />
-                            </td>
-                            <td>
-                                <p:commandButton value="M-" styleClass="btnMemoria btnEliminarMemoria" />
-                            </td>
-                            <td>
-                                <p:commandButton value="MRC" styleClass="btnMemoria btnLlamarMemoria" />
-                            </td>
-                            <td>
+                    <!-- Botones  -->
+                    <div id="botones">
+                        <!-- Botones memoria -->
+                        <table id="btnMemoria" >
+                            <tr>
+                                <td>
+                                    <p:commandButton value="M+" styleClass="btnMemoria btnGuardarMemoria"  />
+                                </td>
+                                <td>
+                                    <p:commandButton value="M-" styleClass="btnMemoria btnEliminarMemoria" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="MRC" styleClass="btnMemoria btnLlamarMemoria" />
+                                </td>
+                                <td>
                                 <p:commandButton value="C" styleClass="btnMemoria btnClear" />
-                            </td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                        </table>
 
-                    <!-- Botones números operaciones -->
-                    <table id="btnOperaciones" >
-                        <tr>
-                            <td>
-                                <p:commandButton value="1" styleClass="btnOperaciones" update="display"
-                                                 onclick="${calculadoraManaged.impirmirDisplay('AS')}"  />
-                            </td>
-                            <td>
-                                <p:commandButton value="2" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="3" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="+" styleClass="btnOperaciones" />
-                            </td>
-                            <td rowspan="2" >
-                                <p:commandButton value="%" styleClass="btnOperaciones btnPorcentaje" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:commandButton value="4" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="5" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="6" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="-" styleClass="btnOperaciones" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:commandButton value="7" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="8" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="9" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="x" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="&#8730;" styleClass="btnOperaciones" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:commandButton value="0" styleClass="btnOperaciones" />
-                            </td>
-                            <td colspan="2" >
-                                <p:commandButton value="=" styleClass="btnOperaciones btnIgual" />
-                            </td>
-                            <td>
-                                <p:commandButton value="/" styleClass="btnOperaciones" />
-                            </td>
-                            <td>
-                                <p:commandButton value="." styleClass="btnOperaciones" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                        <!-- Botones números operaciones -->
+                        <table id="btnOperaciones" >
+                            <tr>
+                                <td>
+                                    <p:commandButton value="1" styleClass="btnOperaciones" update="display"
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('1')}"  />
+                                </td>
+                                <td>
+                                    <p:commandButton value="2" styleClass="btnOperaciones" update="display"
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('2')}" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="3" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="+" styleClass="btnOperaciones" />
+                                </td>
+                                <td rowspan="2" >
+                                    <p:commandButton value="%" styleClass="btnOperaciones btnPorcentaje" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:commandButton value="4" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="5" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="6" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="-" styleClass="btnOperaciones" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:commandButton value="7" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="8" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="9" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="x" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="&#8730;" styleClass="btnOperaciones" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:commandButton value="0" styleClass="btnOperaciones" />
+                                </td>
+                                <td colspan="2" >
+                                    <p:commandButton value="=" styleClass="btnOperaciones btnIgual" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="/" styleClass="btnOperaciones" />
+                                </td>
+                                <td>
+                                    <p:commandButton value="." styleClass="btnOperaciones" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </h:form>
             </div>
         </div>
     </h:body>
