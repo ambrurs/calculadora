@@ -8,7 +8,9 @@ package co.edu.poli.ingenieria.sistemas.controlador;
 
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesNumeros;
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesOperaciones;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -30,7 +32,7 @@ public class calculadoraManaged {
      */
     public String display;
     public String operacionEnMemoria;
-    public List<String> operacionesList;
+    public ArrayList<String> operacionesList = new ArrayList();
     public int numero;
 
     public calculadoraManaged() {
@@ -40,57 +42,77 @@ public class calculadoraManaged {
     public void oprimirBoton(String boton){
         /**Dado el caso que sea un numero*/
         impirmirDisplay(boton);
+        operacionesList.add(boton);
+        determinarOperación();
     }
 
     public void impirmirDisplay(String boton) {
        
-        if (display.isEmpty() || display.equals("0")) {
+        if (display.isEmpty() ) {
             display = boton;
         } else { 
             display += boton;
         }
 
-        operacionesList.add(boton);
+        
     }
     
+    
+    
     public void determinarOperación(){
-        int index = 0;
-        int opera = 0;
-        for(String boton : operacionesList){
+         Integer numero = 0;
+         ListIterator<String> it = operacionesList.listIterator();
+        while(it.hasNext()){
             
-            switch(boton){
+            switch(it.toString()){
                 case BotonesOperaciones.SUMA :
                     /**Suma*/
-                    opera = Integer.parseInt(operacionesList.get(index-1).toString()) 
-                            + Integer.parseInt(operacionesList.get(index+1).toString()) ;
+                    if(it.next() != null){
+                        numero = Integer.parseInt(it.previous()) 
+                            + Integer.parseInt(it.next()) ;
+                    }
                     break;
                 case BotonesOperaciones.RESTA:
-                     opera = Integer.parseInt(operacionesList.get(index-1).toString()) 
-                            / Integer.parseInt(operacionesList.get(index+1).toString()) ;
-                    break;
+                    if(it.next() != null){
+                     numero = Integer.parseInt(it.previous())- 
+                             Integer.parseInt(it.next()) ;
+                    }
+                     break;
                 case BotonesOperaciones.MULTIPLICACION:
-                    opera = Integer.parseInt(operacionesList.get(index-1).toString()) 
-                            * Integer.parseInt(operacionesList.get(index+1).toString()) ;
+                    if(it.next() != null){
+                        numero = Integer.parseInt(it.previous()) 
+                            * Integer.parseInt(it.next()) ;
+                    }
                     break;
 
                 case BotonesOperaciones.DIVISION:
-                    opera = Integer.parseInt(operacionesList.get(index-1).toString()) 
-                            / Integer.parseInt(operacionesList.get(index+1).toString()) ;
+                    if(it.next() != null){
+                     numero = Integer.parseInt(it.previous()) 
+                               / Integer.parseInt(it.next()) ;
+                    }
                     break;
 
                 case BotonesOperaciones.RAIZ:
-                     opera = Integer.parseInt(operacionesList.get(index-1).toString()) ;
+                     if(it.next() != null){
+                        numero = Integer.parseInt(it.next()) ;
+                     }
                      break;
 
                 case BotonesOperaciones.PORCENTAJE:
-                    opera = Integer.parseInt(operacionesList.get(index-1).toString());
+                    if(it.previous() != null){
+                        numero = Integer.parseInt(it.previous());
+                    }
                     break;
-                case BotonesOperaciones.PUNTO:
-                    operacionesList.set(index-1, operacionesList.get(index-1).toString() + boton );
-                    break;
+//                case BotonesOperaciones.PUNTO:
+//                    operacionesList.set(index-1, operacionesList.get(index-1).toString()  );
+//                    break;
             }
-            index++;
         }
+        operacionEnMemoria = numero.toString();
+    }
+    
+    public void addToList(String boton){
+        
     }
     
     
@@ -111,13 +133,6 @@ public class calculadoraManaged {
         this.operacionEnMemoria = operacionEnMemoria;
     }
 
-    public List<String> getOperacionesList() {
-        return operacionesList;
-    }
-
-    public void setOperacionesList(List<String> operacionesList) {
-        this.operacionesList = operacionesList;
-    }
     
     
 }
