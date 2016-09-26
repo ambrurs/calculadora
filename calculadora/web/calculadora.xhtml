@@ -12,16 +12,18 @@
             <div id="content">
                 <!-- Boton de encendido --> 
                 <div id="encendido">
-                    <p:commandButton id="btnEncendido" value="Off"
-                                     styleClass="btnEncendido" > 
+                    <p:outputPanel id="panelVista" >
+                        <p:commandButton id="btnEncendido" value="Off"
+                                         styleClass="btnEncendido" > 
 
-                    </p:commandButton>
+                        </p:commandButton>
+                    </p:outputPanel>    
                 </div>
 
                 <!-- Resultado de las operaciones y demas -->
                 <div id="pantalla">
                     <p:outputPanel id="panelVista" >
-                        <p:outputLabel id="display" value="Valor" />
+                        <p:outputLabel id="display" value="#{calculadoraManaged.display}" />
                     </p:outputPanel>
                 </div>
 
@@ -31,7 +33,7 @@
                     <table id="btnMemoria" >
                         <tr>
                             <td>
-                                <p:commandButton onclick="getValue(this);" value="M+" styleClass="btnMemoria btnGuardarMemoria" />
+                                <p:commandButton value="M+" styleClass="btnMemoria btnGuardarMemoria"  />
                             </td>
                             <td>
                                 <p:commandButton value="M-" styleClass="btnMemoria btnEliminarMemoria" />
@@ -49,7 +51,8 @@
                     <table id="btnOperaciones" >
                         <tr>
                             <td>
-                                <p:commandButton value="1" styleClass="btnOperaciones" />
+                                <p:commandButton value="1" styleClass="btnOperaciones" update="display"
+                                                 onclick="${calculadoraManaged.impirmirDisplay('AS')}"  />
                             </td>
                             <td>
                                 <p:commandButton value="2" styleClass="btnOperaciones" />
@@ -113,12 +116,6 @@
                 </div>
             </div>
         </div>
-        <script>
-            function getValue(id) {
-                debugger;
-                $(id).text();
-            }
-        </script>
     </h:body>
 </html>
 
