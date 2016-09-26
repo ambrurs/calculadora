@@ -8,6 +8,8 @@ package co.edu.poli.ingenieria.sistemas.controlador;
 
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesNumeros;
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesOperaciones;
+import co.edu.poli.ingenieria.sistemas.operaciones.EjecutarOperacion;
+import co.edu.poli.ingenieria.sistemas.operaciones.impl.EjecutarOperacionImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -26,7 +28,8 @@ public class calculadoraManaged {
 
     public BotonesOperaciones botonesOperaciones;
     public BotonesNumeros botonesNumeros;
-
+    public EjecutarOperacion operacion = new EjecutarOperacionImpl() ;
+    
     /**
      * Variable
      */
@@ -48,7 +51,7 @@ public class calculadoraManaged {
 
     public void impirmirDisplay(String boton) {
        
-        if (display.isEmpty() ) {
+        if (display.isEmpty() || display.equals("0") ) {
             display = boton;
         } else { 
             display += boton;
@@ -111,9 +114,13 @@ public class calculadoraManaged {
         operacionEnMemoria = numero.toString();
     }
     
-    public void addToList(String boton){
-        
-    }
+    public void resolverOperacion() throws Exception{
+        display =  operacion.resolverOperaciones(display);
+        if(!display.isEmpty()){
+            System.out.println(display);
+    
+         }   
+     }
     
     
 
