@@ -54,19 +54,19 @@
                             <tr>
                                 <td>
                                     <p:commandButton value="1" styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.oprimirBoton('1')}"  />
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('1')}"  />
                                 </td>
                                 <td>
                                     <p:commandButton value="2" styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.oprimirBoton('2')}" />
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('2')}" />
                                 </td>
                                 <td>
                                     <p:commandButton value="3" styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.oprimirBoton('3')}" />
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('3')}" />
                                 </td>
                                 <td>
                                     <p:commandButton value="+" styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.oprimirBoton('+')}" />
+                                                     actionListener="#{calculadoraManaged.impirmirDisplay('+')}" />
                                 </td>
                                 <td rowspan="2" >
                                     <p:commandButton value="%" styleClass="btnOperaciones btnPorcentaje" update="display"
@@ -119,7 +119,7 @@
                                 </td>
                                 <td colspan="2" >
                                     <p:commandButton value="=" styleClass="btnOperaciones btnIgual"  update="display"
-                                                       />
+                                                     actionListener="#{calculadoraManaged.resolverOperacion()}"  />
                                 </td>
                                 <td>
                                     <p:commandButton value="/" styleClass="btnOperaciones" update="display"
