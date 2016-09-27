@@ -15,14 +15,13 @@
                     <!-- Boton de encendido --> 
                     <div id="encendido">
                         <p:outputPanel id="estado" >
-                            <p:commandButton id="btnEncendido" value="${calculadoraManaged.valorBoton}"
-                                             styleClass="btnEncendido" 
-                                             actionListener="#{calculadoraManaged.encender()}" update="@form"> 
-
-                            </p:commandButton>
+                            <p:inputSwitch id="btnEncendido" 
+                                           styleClass="btnEncendido" >
+                                <p:ajax listener="#{calculadoraManaged.encender()}" update="btnPanel" />
+                            </p:inputSwitch>
                         </p:outputPanel>    
                     </div>
-                    
+
 
                     <!-- Resultado de las operaciones y demas -->
                     <div id="pantalla">
@@ -31,136 +30,136 @@
                         </p:outputPanel>
                     </div>
                     <p:outputPanel id="btnPanel">
-                    <!-- Botones  -->
-                    <div id="botones">
-                        <!-- Botones memoria -->
-                        <table id="btnMemoria" >
-                            <tr>
-                                <td>
-                                    <p:commandButton value="M+"  disabled="#{calculadoraManaged.onOff eq false}" 
-                                                     styleClass="btnMemoria btnGuardarMemoria" 
-                                                     actionListener="#{calculadoraManaged.asignarMemoria()}"  />
-                                </td>
-                                <td>
-                                    <p:commandButton value="M-" disabled="#{calculadoraManaged.onOff eq false}" 
-                                                     styleClass="btnMemoria btnEliminarMemoria"
-                                                     actionListener="#{calculadoraManaged.eliminarMemoria()}"/>
-                                </td>
-                                <td>
-                                    <p:commandButton value="MRC" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnMemoria btnLlamarMemoria" update="display"
-                                                     actionListener="#{calculadoraManaged.llamarMemoria()}"/>
-                                </td>
-                                <td>
-                                    <p:commandButton value="C" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnMemoria btnClear" update="display"
-                                                     actionListener="#{calculadoraManaged.limpiarDisplay()}"/> 
-                                </td>
-                            </tr>
-                        </table>
+                        <!-- Botones  -->
+                        <div id="botones">
+                            <!-- Botones memoria -->
+                            <table id="btnMemoria" >
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="M+"  disabled="#{calculadoraManaged.onOff eq false}" 
+                                                         styleClass="btnMemoria btnGuardarMemoria" 
+                                                         actionListener="#{calculadoraManaged.asignarMemoria()}"  />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="M-" disabled="#{calculadoraManaged.onOff eq false}" 
+                                                         styleClass="btnMemoria btnEliminarMemoria"
+                                                         actionListener="#{calculadoraManaged.eliminarMemoria()}"/>
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="MRC" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnMemoria btnLlamarMemoria" update="display"
+                                                         actionListener="#{calculadoraManaged.llamarMemoria()}"/>
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="C" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnMemoria btnClear" update="display"
+                                                         actionListener="#{calculadoraManaged.limpiarDisplay()}"/> 
+                                    </td>
+                                </tr>
+                            </table>
 
-                        <!-- Botones números operaciones -->
-                        <table id="btnOperaciones" >
-                            <tr>
-                                <td>
-                                    <p:commandButton value="1" styleClass="btnOperaciones"
-                                                     disabled="#{calculadoraManaged.onOff eq false}" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('1')}"  />
-                                </td>
-                                <td>
-                                    <p:commandButton value="2" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('2')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="3" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('3')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="+" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('+')}" />
-                                </td>
-                                <td rowspan="2" >
-                                    <p:commandButton value="%" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones btnPorcentaje" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('%')}" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:commandButton value="4" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('4')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="5" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('5')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="6" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('6')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="-" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('-')}" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:commandButton value="7" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones"  update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('7')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="8" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('8')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="9" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('9')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="*" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('*')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="&#8730;" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:commandButton value="0" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('0')}" />
-                                </td>
-                                <td colspan="2" >
-                                    <p:commandButton value="=" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones btnIgual"  update="display"
-                                                     actionListener="#{calculadoraManaged.resolverOperacion()}"  />
-                                </td>
-                                <td>
-                                    <p:commandButton value="/" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('/')}" />
-                                </td>
-                                <td>
-                                    <p:commandButton value="." disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnOperaciones" update="display"
-                                                     actionListener="#{calculadoraManaged.impirmirDisplay('.')}" />
-                                </td>
-                            </tr>
-                        </table>
-                    
-                    </div>
+                            <!-- Botones números operaciones -->
+                            <table id="btnOperaciones" >
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="1" styleClass="btnOperaciones"
+                                                         disabled="#{calculadoraManaged.onOff eq false}" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('1')}"  />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="2" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('2')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="3" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('3')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="+" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('+')}" />
+                                    </td>
+                                    <td rowspan="2" >
+                                        <p:commandButton value="%" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones btnPorcentaje" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('%')}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="4" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('4')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="5" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('5')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="6" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('6')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="-" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('-')}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="7" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones"  update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('7')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="8" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('8')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="9" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('9')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="*" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('*')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="&#8730;" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="0" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('0')}" />
+                                    </td>
+                                    <td colspan="2" >
+                                        <p:commandButton value="=" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones btnIgual"  update="display"
+                                                         actionListener="#{calculadoraManaged.resolverOperacion()}"  />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="/" disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('/')}" />
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="." disabled="#{calculadoraManaged.onOff eq false}"
+                                                         styleClass="btnOperaciones" update="display"
+                                                         actionListener="#{calculadoraManaged.impirmirDisplay('.')}" />
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
                     </p:outputPanel>
                 </h:form>
             </div>

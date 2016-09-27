@@ -65,6 +65,7 @@ div#botones{
     font-size:80%; 
     margin-right: 12%;
     margin-top:  5%;
+    border-radius: 6px;
 }
 
 /**Tablas de los botones*/
