@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package co.edu.poli.ingenieria.sistemas.controlador;
 
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesNumeros;
@@ -24,12 +23,11 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class calculadoraManaged {
 
-     /*Clases*/
-
+    /*Clases*/
     public BotonesOperaciones botonesOperaciones;
     public BotonesNumeros botonesNumeros;
-    public EjecutarOperacion operacion = new EjecutarOperacionImpl() ;
-    
+    public EjecutarOperacion operacion = new EjecutarOperacionImpl();
+
     /**
      * Variable
      */
@@ -37,72 +35,88 @@ public class calculadoraManaged {
     public String operacionEnMemoria;
     public ArrayList<String> operacionesList = new ArrayList();
     public int numero;
+    public boolean onOff;
 
     public calculadoraManaged() {
         display = "0";
+        onOff = false;
     }
-    
-    public void oprimirBoton(String boton){
-        /**Dado el caso que sea un numero*/
+
+    public void oprimirBoton(String boton) {
+        /**
+         * Dado el caso que sea un numero
+         */
         impirmirDisplay(boton);
         operacionesList.add(boton);
         determinarOperación();
     }
 
     public void impirmirDisplay(String boton) {
-       
-        if (display.isEmpty() || display.equals("0") ) {
+
+        if (display.isEmpty() || display.equals("0")) {
             display = boton;
-        } else { 
+        } else {
             display += boton;
         }
 
-        
     }
-    
-    
-    
-    public void determinarOperación(){
-         Integer numero = 0;
-         ListIterator<String> it = operacionesList.listIterator();
-        while(it.hasNext()){
-            
-            switch(it.toString()){
-                case BotonesOperaciones.SUMA :
-                    /**Suma*/
-                    if(it.next() != null){
-                        numero = Integer.parseInt(it.previous()) 
-                            + Integer.parseInt(it.next()) ;
+
+    public void limpiarDisplay() {
+        this.display = "0";
+    }
+
+    public void encender() {
+        if (this.onOff == false) {
+            this.onOff = true;
+        } else {
+            this.onOff = false;
+        }
+
+    }
+
+    public void determinarOperación() {
+        Integer numero = 0;
+        ListIterator<String> it = operacionesList.listIterator();
+        while (it.hasNext()) {
+
+            switch (it.toString()) {
+                case BotonesOperaciones.SUMA:
+                    /**
+                     * Suma
+                     */
+                    if (it.next() != null) {
+                        numero = Integer.parseInt(it.previous())
+                                + Integer.parseInt(it.next());
                     }
                     break;
                 case BotonesOperaciones.RESTA:
-                    if(it.next() != null){
-                     numero = Integer.parseInt(it.previous())- 
-                             Integer.parseInt(it.next()) ;
+                    if (it.next() != null) {
+                        numero = Integer.parseInt(it.previous())
+                                - Integer.parseInt(it.next());
                     }
-                     break;
+                    break;
                 case BotonesOperaciones.MULTIPLICACION:
-                    if(it.next() != null){
-                        numero = Integer.parseInt(it.previous()) 
-                            * Integer.parseInt(it.next()) ;
+                    if (it.next() != null) {
+                        numero = Integer.parseInt(it.previous())
+                                * Integer.parseInt(it.next());
                     }
                     break;
 
                 case BotonesOperaciones.DIVISION:
-                    if(it.next() != null){
-                     numero = Integer.parseInt(it.previous()) 
-                               / Integer.parseInt(it.next()) ;
+                    if (it.next() != null) {
+                        numero = Integer.parseInt(it.previous())
+                                / Integer.parseInt(it.next());
                     }
                     break;
 
                 case BotonesOperaciones.RAIZ:
-                     if(it.next() != null){
-                        numero = Integer.parseInt(it.next()) ;
-                     }
-                     break;
+                    if (it.next() != null) {
+                        numero = Integer.parseInt(it.next());
+                    }
+                    break;
 
                 case BotonesOperaciones.PORCENTAJE:
-                    if(it.previous() != null){
+                    if (it.previous() != null) {
                         numero = Integer.parseInt(it.previous());
                     }
                     break;
@@ -113,16 +127,14 @@ public class calculadoraManaged {
         }
         operacionEnMemoria = numero.toString();
     }
-    
-    public void resolverOperacion() throws Exception{
-        display =  operacion.resolverOperaciones(display);
-        if(!display.isEmpty()){
+
+    public void resolverOperacion() throws Exception {
+        display = operacion.resolverOperaciones(display);
+        if (!display.isEmpty()) {
             System.out.println(display);
-    
-         }   
-     }
-    
-    
+
+        }
+    }
 
     public String getDisplay() {
         return display;
@@ -140,6 +152,12 @@ public class calculadoraManaged {
         this.operacionEnMemoria = operacionEnMemoria;
     }
 
-    
-    
+    public boolean isOnOff() {
+        return onOff;
+    }
+
+    public void setOnOff(boolean onOff) {
+        this.onOff = onOff;
+    }
+
 }
