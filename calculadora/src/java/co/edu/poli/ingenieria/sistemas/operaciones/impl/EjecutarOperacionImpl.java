@@ -30,9 +30,11 @@ public class EjecutarOperacionImpl implements  EjecutarOperacion {
     @Override
     public String resolverOperaciones(String operacion) throws Exception {
         try {
+            String temporal = operacion;
+            
             ScriptEngineManager opera = new ScriptEngineManager();
             ScriptEngine engine = opera.getEngineByName("JavaScript");
-             return engine.eval(operacion).toString();
+             return engine.eval(temporal.replace("%", "/100")).toString();
         } catch (Exception e) {
             System.out.println("Error casteando operacion"+ e.getMessage());
         }

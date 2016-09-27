@@ -10,6 +10,18 @@ package co.edu.poli.ingenieria.sistemas.entidad;
  *
  * @author andres
  */
-public interface Memoria {
+public class Memoria {
+    
+    public String valor;
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    
+    
     
 }

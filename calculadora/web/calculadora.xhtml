@@ -15,9 +15,9 @@
                     <!-- Boton de encendido --> 
                     <div id="encendido">
                         <p:outputPanel id="estado" >
-                            <p:commandButton id="btnEncendido" value="Off"
+                            <p:commandButton id="btnEncendido" value="${calculadoraManaged.valorBoton}"
                                              styleClass="btnEncendido" 
-                                             actionListener="#{calculadoraManaged.encender()}" update="btnPanel"> 
+                                             actionListener="#{calculadoraManaged.encender()}" update="@form"> 
 
                             </p:commandButton>
                         </p:outputPanel>    
@@ -38,15 +38,18 @@
                             <tr>
                                 <td>
                                     <p:commandButton value="M+"  disabled="#{calculadoraManaged.onOff eq false}" 
-                                                     styleClass="btnMemoria btnGuardarMemoria"  />
+                                                     styleClass="btnMemoria btnGuardarMemoria" 
+                                                     actionListener="#{calculadoraManaged.asignarMemoria()}"  />
                                 </td>
                                 <td>
                                     <p:commandButton value="M-" disabled="#{calculadoraManaged.onOff eq false}" 
-                                                     styleClass="btnMemoria btnEliminarMemoria" />
+                                                     styleClass="btnMemoria btnEliminarMemoria"
+                                                     actionListener="#{calculadoraManaged.eliminarMemoria()}"/>
                                 </td>
                                 <td>
                                     <p:commandButton value="MRC" disabled="#{calculadoraManaged.onOff eq false}"
-                                                     styleClass="btnMemoria btnLlamarMemoria" />
+                                                     styleClass="btnMemoria btnLlamarMemoria" update="display"
+                                                     actionListener="#{calculadoraManaged.llamarMemoria()}"/>
                                 </td>
                                 <td>
                                     <p:commandButton value="C" disabled="#{calculadoraManaged.onOff eq false}"
@@ -164,4 +167,3 @@
         </div>
     </h:body>
 </html>
-
