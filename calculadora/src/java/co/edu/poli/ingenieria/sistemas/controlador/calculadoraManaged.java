@@ -7,13 +7,16 @@ package co.edu.poli.ingenieria.sistemas.controlador;
 
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesNumeros;
 import co.edu.poli.ingenieria.sistemas.entidad.BotonesOperaciones;
+import co.edu.poli.ingenieria.sistemas.entidad.Memoria;
 import co.edu.poli.ingenieria.sistemas.operaciones.EjecutarOperacion;
 import co.edu.poli.ingenieria.sistemas.operaciones.impl.EjecutarOperacionImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -24,32 +27,23 @@ import javax.faces.bean.ViewScoped;
 public class calculadoraManaged {
 
     /*Clases*/
-    public BotonesOperaciones botonesOperaciones;
-    public BotonesNumeros botonesNumeros;
+
     public EjecutarOperacion operacion = new EjecutarOperacionImpl();
+    public Memoria memoria = new Memoria();
 
     /**
      * Variable
      */
     public String display;
-    public String operacionEnMemoria;
-    public ArrayList<String> operacionesList = new ArrayList();
-    public int numero;
     public boolean onOff;
+    public String valorBoton; 
 
     public calculadoraManaged() {
         display = "0";
         onOff = false;
+        valorBoton = "On";
     }
 
-    public void oprimirBoton(String boton) {
-        /**
-         * Dado el caso que sea un numero
-         */
-        impirmirDisplay(boton);
-        operacionesList.add(boton);
-        determinarOperación();
-    }
 
     public void impirmirDisplay(String boton) {
 
@@ -61,6 +55,7 @@ public class calculadoraManaged {
 
     }
 
+    
     public void limpiarDisplay() {
         this.display = "0";
     }
@@ -68,65 +63,36 @@ public class calculadoraManaged {
     public void encender() {
         if (this.onOff == false) {
             this.onOff = true;
+            this.valorBoton = "Off";
         } else {
             this.onOff = false;
+            this.valorBoton = "On";
         }
 
     }
-
-    public void determinarOperación() {
-        Integer numero = 0;
-        ListIterator<String> it = operacionesList.listIterator();
-        while (it.hasNext()) {
-
-            switch (it.toString()) {
-                case BotonesOperaciones.SUMA:
-                    /**
-                     * Suma
-                     */
-                    if (it.next() != null) {
-                        numero = Integer.parseInt(it.previous())
-                                + Integer.parseInt(it.next());
-                    }
-                    break;
-                case BotonesOperaciones.RESTA:
-                    if (it.next() != null) {
-                        numero = Integer.parseInt(it.previous())
-                                - Integer.parseInt(it.next());
-                    }
-                    break;
-                case BotonesOperaciones.MULTIPLICACION:
-                    if (it.next() != null) {
-                        numero = Integer.parseInt(it.previous())
-                                * Integer.parseInt(it.next());
-                    }
-                    break;
-
-                case BotonesOperaciones.DIVISION:
-                    if (it.next() != null) {
-                        numero = Integer.parseInt(it.previous())
-                                / Integer.parseInt(it.next());
-                    }
-                    break;
-
-                case BotonesOperaciones.RAIZ:
-                    if (it.next() != null) {
-                        numero = Integer.parseInt(it.next());
-                    }
-                    break;
-
-                case BotonesOperaciones.PORCENTAJE:
-                    if (it.previous() != null) {
-                        numero = Integer.parseInt(it.previous());
-                    }
-                    break;
-//                case BotonesOperaciones.PUNTO:
-//                    operacionesList.set(index-1, operacionesList.get(index-1).toString()  );
-//                    break;
-            }
-        }
-        operacionEnMemoria = numero.toString();
+    
+    
+    public void asignarMemoria(){
+        memoria.valor = display;
+        String msj = "Número guardado en la memoria";
+        enviarMensaje(msj);
     }
+    
+    public void llamarMemoria(){
+        display += memoria.valor;
+    }
+    
+    public void eliminarMemoria(){
+        memoria.valor = "";
+        String msj = "Número eliminado de la memoria";
+        enviarMensaje(msj);
+    }
+    
+    public void enviarMensaje(String mensaje){
+        FacesMessage msg = new FacesMessage(mensaje);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 
     public void resolverOperacion() throws Exception {
         display = operacion.resolverOperaciones(display);
@@ -144,14 +110,6 @@ public class calculadoraManaged {
         this.display = display;
     }
 
-    public String getOperacionEnMemoria() {
-        return operacionEnMemoria;
-    }
-
-    public void setOperacionEnMemoria(String operacionEnMemoria) {
-        this.operacionEnMemoria = operacionEnMemoria;
-    }
-
     public boolean isOnOff() {
         return onOff;
     }
@@ -159,5 +117,15 @@ public class calculadoraManaged {
     public void setOnOff(boolean onOff) {
         this.onOff = onOff;
     }
+
+    public String getValorBoton() {
+        return valorBoton;
+    }
+
+    public void setValorBoton(String valorBoton) {
+        this.valorBoton = valorBoton;
+    }
+    
+    
 
 }
